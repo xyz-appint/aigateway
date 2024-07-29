@@ -1,3 +1,4 @@
+import { env } from 'process';
 import { ProviderAPIConfig } from '../types';
 
 const AnthropicAPIConfig: ProviderAPIConfig = {
@@ -5,7 +6,7 @@ const AnthropicAPIConfig: ProviderAPIConfig = {
   headers: ({ providerOptions, fn }) => {
     const headers: Record<string, string> = {
       // 'X-API-Key': `${providerOptions.apiKey}`,
-      'X-API-Key': self['ANTHROPIC_API_KEY'],
+      'X-API-Key': env.ANTHROPIC_API_KEY,
       'anthropic-version': '2023-06-01',
     };
     if (fn === 'chatComplete') {

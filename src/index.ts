@@ -21,11 +21,9 @@ import { requestValidator } from './middlewares/requestValidator';
 import { compress } from 'hono/compress';
 import { getRuntimeKey } from 'hono/adapter';
 import { imageGenerationsHandler } from './handlers/imageGenerationsHandler';
+import { Env } from './types/env';
 
-export interface Env {
-  ANTHROPIC_API_KEY: string;
-  OPENAI_API_KEY: string;
-}
+
 // Create a new Hono server instance
 const app = new Hono();
 
@@ -43,11 +41,12 @@ app.use('*', (c, next) => {
   return next();
 });
 
+
 /**
  * GET route for the root path.
  * Returns a greeting message.
  */
-app.get('/', (c) => c.text('AI Gateway says hey! ' + c.env['OPENAI_API_KEY']));
+app.get('/', (c) => c.text('AI Gateway says hey! ' + env['OPENAI_API_KEY']));
 
 // Use prettyJSON middleware for all routes
 app.use('*', prettyJSON());
