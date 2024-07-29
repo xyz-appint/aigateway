@@ -5,7 +5,7 @@ const OpenAIAPIConfig: ProviderAPIConfig = {
   headers: ({ providerOptions }) => {
     const headersObj: Record<string, string> = {
       // Authorization: `Bearer ${providerOptions.apiKey}`,
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      Authorization: `Bearer ${self['OPENAI_API_KEY']}`,
     };
     if (providerOptions.openaiOrganization) {
       headersObj['OpenAI-Organization'] = providerOptions.openaiOrganization;
