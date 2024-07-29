@@ -1,4 +1,4 @@
-name = "aigw"
+name = "aigateway"
 compatibility_date = "2023-01-01"
 main = "src/index.ts"
 node_compat = true
@@ -12,7 +12,7 @@ CUSTOM_HEADERS_TO_IGNORE = []
 #Configuration for DEVELOPMENT environment
 #
 [env.staging]
-name = "aigw-dev"
+name = "aigateway-dev"
 
 [env.staging.vars]
 ENVIRONMENT = 'staging'
@@ -23,7 +23,7 @@ CUSTOM_HEADERS_TO_IGNORE = []
 #Configuration for PRODUCTION environment
 #
 [env.production]
-name = "aigw"
+name = "aigateway"
 logpush=true
 
 [env.production.vars]
