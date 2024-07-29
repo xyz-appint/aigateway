@@ -6,7 +6,9 @@ const AnthropicAPIConfig: ProviderAPIConfig = {
   headers: ({ providerOptions, fn }) => {
     const headers: Record<string, string> = {
       // 'X-API-Key': `${providerOptions.apiKey}`,
-      'X-API-Key': env.ANTHROPIC_API_KEY,
+      // 'X-API-Key': process.env['ANTHROPIC_API_KEY']??providerOptions.apiKey,
+      'X-API-Key': process.env['ANTHROPIC_API_KEY'] || providerOptions.apiKey || '',
+
       'anthropic-version': '2023-06-01',
     };
     if (fn === 'chatComplete') {
