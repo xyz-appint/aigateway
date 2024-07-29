@@ -22,10 +22,6 @@ import { compress } from 'hono/compress';
 import { getRuntimeKey } from 'hono/adapter';
 import { imageGenerationsHandler } from './handlers/imageGenerationsHandler';
 
-export interface Env {
-  OPENAI_API_KEY: string;
-}
-
 // Create a new Hono server instance
 const app = new Hono();
 
@@ -148,4 +144,4 @@ app.get('/v1/*', requestValidator, proxyGetHandler);
 app.delete('/v1/*', requestValidator, proxyGetHandler);
 
 // Export the app
-export default app satisfies ExportedHandler<Env>;
+export default app;
