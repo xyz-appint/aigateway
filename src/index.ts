@@ -33,6 +33,15 @@ const app = new Hono();
  * This check if its not any of the 2 and then applies the compress middleware to avoid double compression.
  */
 
+app.use('*', async (c, next) => {  
+  const clientIP = c.req.header('CF-Connecting-IP') || c.req.header('cf-connecting-ip') || c.req.ip;  
+  const allowedIP = '47.237.116.30';  
+  if (clientIP !== allowedIP) {    
+    return c.text('Access Denied , F**K OFF ！！！', 403);  
+  }
+  await next();
+})
+
 app.use('*', (c, next) => {
   const runtime = getRuntimeKey();
   if (runtime !== 'lagon' && runtime !== 'workerd' && runtime !== 'node') {
