@@ -38,8 +38,21 @@ app.use('*', (c, next) => {
   if (runtime !== 'lagon' && runtime !== 'workerd' && runtime !== 'node') {
     return compress()(c, next);
   }
-  process.env['OPENAI_API_KEY'] = c.env.OPENAI_API_KEY || '';
-  process.env['ANTHROPIC_API_KEY'] = c.env.ANTHROPIC_API_KEY || '';
+  if (c.env && process.env) {
+    if (typeof c.env.OPENAI_API_KEY === 'string') {
+      process.env.OPENAI_API_KEY = c.env.OPENAI_API_KEY;
+    } else {
+      process.env.OPENAI_API_KEY = '';
+    }
+    if (typeof c.env.ANTHROPIC_API_KEY === 'string') {
+      process.env.ANTHROPIC_API_KEY = c.env.ANTHROPIC_API_KEY;
+    } else {
+      process.env.ANTHROPIC_API_KEY = '';
+    }
+  } else {
+    process.env['OPENAI_API_KEY'] = '';
+    process.env['ANTHROPIC_API_KEY'] = '';
+  }
   return next();
 });
 
