@@ -38,6 +38,7 @@ app.use('*', (c, next) => {
   if (runtime !== 'lagon' && runtime !== 'workerd' && runtime !== 'node') {
     return compress()(c, next);
   }
+  process.env['OPENAI_API_KEY'] = c.env.OPENAI_API_KEY;
   return next();
 });
 
@@ -46,7 +47,7 @@ app.use('*', (c, next) => {
  * GET route for the root path.
  * Returns a greeting message.
  */
-app.get('/', (c) => c.text('AI Gateway says hey! ' + env['OPENAI_API_KEY']));
+app.get('/', (c) => c.text('AI Gateway says hey! ' + process.env['OPENAI_API_KEY']));
 
 // Use prettyJSON middleware for all routes
 app.use('*', prettyJSON());
