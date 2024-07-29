@@ -71,6 +71,11 @@ const transformToProviderRequest = (
     if (!Array.isArray(paramConfigs)) {
       paramConfigs = [paramConfigs];
     }
+    let isVision = false;
+    let jsonString = JSON.stringify(providerConfig);
+    if (jsonString.indexOf("image_url") !== -1) {
+      isVision = true;
+    }
 
     for (const paramConfig of paramConfigs) {
       // If the parameter is present in the incoming request body
@@ -112,6 +117,27 @@ const transformToProviderRequest = (
           value > paramConfig.max
         ) {
           value = paramConfig.max;
+        }
+
+        if (value == 'claude-3-opus-20240229' ) {
+          value = 'claude-3-5-sonnet-20240620';
+        }
+        if (value == 'gpt-4-turbo' ) {
+          if(isVision) {
+            value = 'gpt-4-turbo';
+          } else {
+            value = (Math.floor(Math.random() * (100 - 1 + 1)) + 1) % 2 ? 'gpt-4-turbo' : 'gpt-4o';
+          }
+        }
+        
+        if (value == 'gpt-4-turbo-preview' ) {
+          value = 'gpt-4o-mini';
+        }
+        if (value == 'gpt-4-1106-preview' ) {
+          value = 'gpt-4o-mini';
+        }
+        if (value == 'gpt-4-0125-preview' ) {
+          value = 'gpt-4o-mini';
         }
 
         // Set the transformed parameter to the validated value

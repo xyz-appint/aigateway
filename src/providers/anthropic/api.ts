@@ -4,7 +4,8 @@ const AnthropicAPIConfig: ProviderAPIConfig = {
   getBaseURL: () => 'https://api.anthropic.com/v1',
   headers: ({ providerOptions, fn }) => {
     const headers: Record<string, string> = {
-      'X-API-Key': `${providerOptions.apiKey}`,
+      // 'X-API-Key': `${providerOptions.apiKey}`,
+      'X-API-Key': `${process.env.ANTHROPIC_API_KEY}`,
       'anthropic-version': '2023-06-01',
     };
     if (fn === 'chatComplete') {

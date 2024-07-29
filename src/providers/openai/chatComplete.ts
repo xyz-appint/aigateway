@@ -12,7 +12,7 @@ export const OpenAIChatCompleteConfig: ProviderConfig = {
   model: {
     param: 'model',
     required: true,
-    default: 'gpt-3.5-turbo',
+    default: 'gpt-4o-mini',
   },
   messages: {
     param: 'messages',
