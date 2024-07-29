@@ -398,9 +398,9 @@ export const AnthropicChatCompleteResponseTransform: (
         },
       ],
       usage: {
-        prompt_tokens: input_tokens ?? 0,
-        completion_tokens: output_tokens  ?? 0,
-        total_tokens: input_tokens ?? 0 + output_tokens ?? 0,
+        prompt_tokens: 0,
+        completion_tokens: 0,
+        total_tokens: 0,
       },
     };
   }
@@ -461,7 +461,7 @@ export const AnthropicChatCompleteStreamChunkTransform: (
           },
         ],
         usage: {
-          prompt_tokens: parsedChunk.message?.usage?.input_tokens ?? 0,
+          prompt_tokens: 0,
         },
       })}` + '\n\n'
     );
@@ -483,7 +483,7 @@ export const AnthropicChatCompleteStreamChunkTransform: (
           },
         ],
         usage: {
-          completion_tokens: parsedChunk.usage?.output_tokens ?? 0,
+          completion_tokens: 0,
         },
       })}` + '\n\n'
     );
